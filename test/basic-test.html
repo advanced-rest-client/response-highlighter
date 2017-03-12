@@ -29,8 +29,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </template>
     </test-fixture>
 
+    <test-fixture id="ca">
+      <template>
+        <response-highlighter>
+          <paper-icon-button content-action></paper-icon-button>
+        </response-highlighter>
+      </template>
+    </test-fixture>
+
     <script>
-    /* global suite, test, fixture, assert */
+    /* global fixture, assert */
     suite('basic', function() {
       var xml;
       var element;
@@ -44,11 +52,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           done();
         });
       });
+
       setup(function() {
         element = fixture('basic');
         element.responseText = xml;
         element.contentType = 'application/xml';
       });
+
       test('Should set hasResponse to true', function() {
         assert.equal(element.hasResponse, true);
       });
@@ -57,6 +67,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         assert.instanceOf(element._textSearch, HTMLElement);
       });
 
+      test('Content actions pane shoud be visible', function() {
+        var pane = Polymer.dom(element.root).querySelector('.actions-panel');
+        assert.isFalse(pane.classList.contains('hidden'));
+      });
+    });
+
+    suite('content actions', function() {
+      var element;
+      setup(function() {
+        element = fixture('ca');
+      });
+      test('Should have distributed nodes', function() {
+        var buttons = element.queryAllEffectiveChildren('paper-icon-button');
+        assert.equal(buttons.length, 1);
+      });
     });
     </script>
 
