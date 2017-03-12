@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/advanced-rest-client/response-highlighter.svg?branch=master)](https://travis-ci.org/advanced-rest-client/response-highlighter)  
+[![Build Status](https://travis-ci.org/advanced-rest-client/response-highlighter.svg?branch=stage)](https://travis-ci.org/advanced-rest-client/response-highlighter)  
 
 # response-highlighter
 
@@ -41,14 +41,26 @@ If the platform doesn't support native text search, this element implements
 Set any text to the `query` attribute and it will automatically highlight
 occurance of the text.
 
+## Content actions
+The element can render a actions pane above the code view. Action pane is to
+display content actions that is relevan in context of the response displayed
+below the icon buttons. It should be icon buttons or just buttons added to this
+view.
+Buttons need to have `content-action` property set to be included to this view.
+```
+<json-viewer json='{"json": "test"}'>
+  <paper-icon-button content-action title="Copy content to clipboard" icon="arc:content-copy"></paper-icon-button>
+</json-viewer>
+```
+
 ### Styling
 `<response-highlighter>` provides the following custom properties and mixins for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
 `--response-highlighter` | Mixin applied to the element | `{}`
---response-highlighter-action-bar | Mixin applied to the action bar above the highlighted code | `{}`
---no-info-message | Mixin applied to the "nothing to display" message (theme variable) | `{}`
+`--response-highlighter-action-bar` | Mixin applied to the action bar above the highlighted code | `{}`
+`--no-info-message` | Mixin applied to the "nothing to display" message (theme variable) | `{}`
 
 See prism-highlight element for more styling options.
 
