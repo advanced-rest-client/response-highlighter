@@ -107,7 +107,7 @@ See prism-highlight element for more styling options.
     <div class$="[[_computeActionsPanelClass(hasResponse)]]">
       <content select="[content-action]"></content>
     </div>
-    <prism-highlight max-read="[[maxRead]]" hidden$="[[!hasResponse]]" id="prism" code="[[responseText]]" lang$="[[contentType]]"></prism-highlight>
+    <prism-highlight max-read="[[maxRead]]" hidden$="[[!hasResponse]]" id="prism" code="[[responseText]]" lang$="[[lang]]"></prism-highlight>
     <p class="no-info" hidden$="[[hasResponse]]">Nothing to dispplay.</p>
   </template>
   <script>
@@ -148,7 +148,14 @@ See prism-highlight element for more styling options.
         observer: '_queryChanged'
       },
       // Attribute binded to the prism-highlight element.
-      maxRead: Number
+      maxRead: Number,
+      /**
+       * The lang property for the Prism.
+       */
+      lang: {
+        type: String,
+        computed: '_computeLang(contentType)'
+      }
     },
     // Highlights the query in text.
     _queryChanged: function(query) {
@@ -169,6 +176,21 @@ See prism-highlight element for more styling options.
         clazz += ' hidden';
       }
       return clazz;
+    },
+    /**
+     * Computes a `lang` property for the Prism from the response content-type
+     */
+    _computeLang: function(contentType) {
+      if (!contentType) {
+        return undefined;
+      }
+      if (!contentType.indexOf) {
+        return undefined;
+      }
+      if (contentType.indexOf(';') !== -1) {
+        return contentType.split(';')[0];
+      }
+      return contentType;
     }
   });
   </script>
