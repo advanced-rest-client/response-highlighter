@@ -1,3 +1,13 @@
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/advanced-rest-client/response-highlighter/compare/0.1.2...0.1.3) (2017-08-31)
+
+
+### New
+
+* Added `lang` property computation to pass correct value to Prism. ([4b374d68d74f1fb728ad51e88cfc615f1ead892b](https://github.com/advanced-rest-client/response-highlighter/commit/4b374d68d74f1fb728ad51e88cfc615f1ead892b))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/advanced-rest-client/response-highlighter/compare/0.1.1...v0.1.2) (2017-03-12)
 
