@@ -96,6 +96,13 @@ declare namespace UiElements {
     readonly lang: string|null|undefined;
 
     /**
+     * Set to `true` when `prism-highlight` dispatches `prism-highlight-timeout`
+     * event. It informs application that there was a timeout.
+     * It is cleared when `lang` or `hasResponse` changes
+     */
+    readonly isTimeout: boolean|null|undefined;
+
+    /**
      * Computes if the element has the response data.
      */
     _computeHasResponse(responseText: any): any;
@@ -109,6 +116,17 @@ declare namespace UiElements {
      * Computes a `lang` property for the Prism from the response content-type
      */
     _computeLang(contentType: any): any;
+
+    /**
+     * Handler for `prism-highlight-timeout` custom event.
+     * Sets `isTimeout` property to `true`.
+     */
+    _prismTimeout(): void;
+
+    /**
+     * Clears `isTimeout` flag if set to true.
+     */
+    _clearTimeout(): void;
   }
 }
 

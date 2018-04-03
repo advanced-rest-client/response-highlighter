@@ -56,6 +56,32 @@
         const pane = element.shadowRoot.querySelector('.actions-panel');
         assert.isFalse(pane.classList.contains('hidden'));
       });
+
+      test('isTimeout is undefined', () => {
+        assert.isUndefined(element.isTimeout);
+      });
+
+      test('isTimeout is set when prism timeout', (done) => {
+        flush(() => {
+          const node = element.shadowRoot.querySelector('prism-highlight');
+          const ev = new CustomEvent('prism-highlight-timeout');
+          node.dispatchEvent(ev);
+          assert.isTrue(element.isTimeout);
+          done();
+        });
+      });
+
+      test('Clears isTimeout when content type change', (done) => {
+        flush(() => {
+          const node = element.shadowRoot.querySelector('prism-highlight');
+          const ev = new CustomEvent('prism-highlight-timeout');
+          node.dispatchEvent(ev);
+          assert.isTrue(element.isTimeout);
+          element.contentType = 'application/json';
+          assert.isFalse(element.isTimeout);
+          done();
+        });
+      });
     });
 
     suite('content actions', () => {

@@ -43,7 +43,7 @@ the License.
     <div class$="[[_computeActionsPanelClass(hasResponse)]]">
       <slot name="content-action"></slot>
     </div>
-    <prism-highlight max-read="[[maxRead]]" hidden$="[[!hasResponse]]" code="[[responseText]]" lang$="[[lang]]"></prism-highlight>
+    <prism-highlight max-read="[[maxRead]]" hidden$="[[!hasResponse]]" code="[[responseText]]" lang$="[[lang]]" on-prism-highlight-timeout="_prismTimeout"></prism-highlight>
     <p class="no-info" hidden$="[[hasResponse]]">Nothing to dispplay.</p>
   </template>
   <script>
@@ -132,8 +132,23 @@ the License.
         lang: {
           type: String,
           computed: '_computeLang(contentType)'
+        },
+        /**
+         * Set to `true` when `prism-highlight` dispatches `prism-highlight-timeout`
+         * event. It informs application that there was a timeout.
+         * It is cleared when `lang` or `hasResponse` changes
+         */
+        isTimeout: {
+          type: Boolean,
+          readOnly: true,
+          notify: true
         }
       };
+    }
+    static get observers() {
+      return [
+        '_clearTimeout(lang, hasResponse)'
+      ];
     }
     // Computes if the element has the response data.
     _computeHasResponse(responseText) {
@@ -158,6 +173,21 @@ the License.
         return contentType.split(';')[0];
       }
       return contentType;
+    }
+    /**
+     * Handler for `prism-highlight-timeout` custom event.
+     * Sets `isTimeout` property to `true`.
+     */
+    _prismTimeout() {
+      this._setIsTimeout(true);
+    }
+    /**
+     * Clears `isTimeout` flag if set to true.
+     */
+    _clearTimeout() {
+      if (this.isTimeout) {
+        this._setIsTimeout(false);
+      }
     }
   }
   window.customElements.define(ResponseHighlighter.is, ResponseHighlighter);
