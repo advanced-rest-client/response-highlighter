@@ -1,3 +1,9 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/advanced-rest-client/response-highlighter/compare/0.1.3...1.0.0) (2018-04-03)
+
+
+
+
 <a name="0.1.4"></a>
 ## [0.1.4](https://github.com/advanced-rest-client/response-highlighter/compare/0.1.3...0.1.4) (2017-08-31)
 
