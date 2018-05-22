@@ -1,3 +1,13 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/advanced-rest-client/response-highlighter/compare/0.1.3...2.0.0) (2018-05-22)
+
+
+### Update
+
+* Publishing stable version with Polymer 2 support ([888353b8320148b24276aee42c0162810bda3746](https://github.com/advanced-rest-client/response-highlighter/commit/888353b8320148b24276aee42c0162810bda3746))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/advanced-rest-client/response-highlighter/compare/0.1.3...1.0.0) (2018-04-03)
 
