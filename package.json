@@ -15,7 +15,7 @@
   "scripts": {
     "lint": "polymer lint response-highlighter.html",
     "test-sauce": "polymer test --plugin sauce --job-name \"response-highlighter:local-test\"",
-    "test": "polymer test",
+    "test": "polymer test --plugin local",
     "update-types": "gen-typescript-declarations --deleteExisting --outDir ."
   },
   "repository": {
