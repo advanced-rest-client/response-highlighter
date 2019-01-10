@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
     <script src="../../iron-test-helpers/test-helpers.js"></script>
-    <script src="../../iron-test-helpers/mock-interactions.js"></script>
     <link rel="import" href="../response-highlighter.html">
     <link rel="import" href="../../fetch-polyfill/fetch-polyfill.html">
 
@@ -29,7 +28,6 @@
     </test-fixture>
 
     <script>
-    /* global fixture, assert */
     suite('basic', () => {
       let xml;
       let element;
@@ -111,6 +109,16 @@
       test('Returns the same content type', () => {
         const result = element._computeLang('application/json');
         assert.equal(result, 'application/json');
+      });
+
+      test('Returns undefined when no argument', () => {
+        const result = element._computeLang();
+        assert.isUndefined(result);
+      });
+
+      test('Returns undefined when not a string', () => {
+        const result = element._computeLang(13);
+        assert.isUndefined(result);
       });
     });
 
