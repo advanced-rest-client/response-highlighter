@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
-    <script src="../../iron-test-helpers/test-helpers.js"></script>
-    <link rel="import" href="../response-highlighter.html">
-    <link rel="import" href="../../fetch-polyfill/fetch-polyfill.html">
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
 
   </head>
   <body>
@@ -27,7 +28,9 @@
       </template>
     </test-fixture>
 
-    <script>
+    <script type="module">
+    import '../response-highlighter.js';
+    // import { a11ySuite } from '../../../wct-browser-legacy/a11ySuite.js';
     suite('basic', () => {
       let xml;
       let element;
@@ -53,32 +56,6 @@
       test('Content actions pane is visible', () => {
         const pane = element.shadowRoot.querySelector('.actions-panel');
         assert.isFalse(pane.classList.contains('hidden'));
-      });
-
-      test('isTimeout is undefined', () => {
-        assert.isUndefined(element.isTimeout);
-      });
-
-      test('isTimeout is set when prism timeout', (done) => {
-        flush(() => {
-          const node = element.shadowRoot.querySelector('prism-highlight');
-          const ev = new CustomEvent('prism-highlight-timeout');
-          node.dispatchEvent(ev);
-          assert.isTrue(element.isTimeout);
-          done();
-        });
-      });
-
-      test('Clears isTimeout when content type change', (done) => {
-        flush(() => {
-          const node = element.shadowRoot.querySelector('prism-highlight');
-          const ev = new CustomEvent('prism-highlight-timeout');
-          node.dispatchEvent(ev);
-          assert.isTrue(element.isTimeout);
-          element.contentType = 'application/json';
-          assert.isFalse(element.isTimeout);
-          done();
-        });
       });
     });
 
@@ -122,7 +99,7 @@
       });
     });
 
-    a11ySuite('ca');
+    // a11ySuite('ca');
     </script>
 
   </body>

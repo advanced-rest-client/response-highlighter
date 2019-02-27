@@ -1,29 +1,56 @@
 {
-  "name": "@advanced-rest-client/response-highlighter",
   "description": "An element that parses the HTTP response and displays highlighted result",
-  "version": "2.0.1",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "response",
+    "highlighter"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/advanced-rest-client/response-highlighter.git"
+  },
+  "name": "@advanced-rest-client/response-highlighter",
+  "version": "3.0.0-preview.1",
   "license": "Apache-2.0",
   "authors": [
     "Pawel Psztyc",
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.6.0"
+    "@polymer/gen-typescript-declarations": "^1.6.1",
+    "@polymer/iron-demo-helpers": "^3.0.0",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "@polymer/iron-test-helpers": "^3.0.0",
+    "@polymer/iron-component-page": "^4.0.0",
+    "@polymer/paper-input": "^3.0.0",
+    "@polymer/paper-button": "^3.0.0",
+    "@polymer/paper-toast": "^3.0.0",
+    "@polymer/paper-icon-button": "^3.0.0",
+    "@polymer/test-fixture": "^4.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.3",
+    "wct-mocha": "^1.0.0"
   },
-  "private": false,
-  "main": "response-highlighter.html",
+  "main": "response-highlighter.js",
   "scripts": {
     "lint": "polymer lint response-highlighter.html",
     "test-sauce": "polymer test --plugin sauce --job-name \"response-highlighter:local-test\"",
     "test": "polymer test --plugin local",
     "update-types": "gen-typescript-declarations --deleteExisting --outDir ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/advanced-rest-client/response-highlighter.git"
-  },
   "bugs": {
     "url": "https://github.com/advanced-rest-client/response-highlighter/issues",
     "email": "arc@mulesoft.com"
+  },
+  "contributors": [
+    "Pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
+  ],
+  "dependencies": {
+    "@advanced-rest-client/prism-highlight": "^4.0.0-preview.1",
+    "@polymer/iron-flex-layout": "^3.0.0",
+    "@polymer/polymer": "^3.0.0"
   }
 }
