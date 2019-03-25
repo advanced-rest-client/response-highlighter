@@ -11,10 +11,10 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 */
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
-import '@advanced-rest-client/prism-highlight/prism-highlight.js';
-import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
+import '../../@advanced-rest-client/prism-highlight/prism-highlight.js';
+import '../../@polymer/iron-flex-layout/iron-flex-layout.js';
 /**
  * An element that parses the HTTP response and displays highlighted result.
  *
