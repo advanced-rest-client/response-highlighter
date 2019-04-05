@@ -11,7 +11,7 @@
     "url": "git://github.com/advanced-rest-client/response-highlighter.git"
   },
   "name": "@advanced-rest-client/response-highlighter",
-  "version": "3.0.0-preview.3",
+  "version": "3.0.0-preview.4",
   "license": "Apache-2.0",
   "authors": [
     "Pawel Psztyc",
