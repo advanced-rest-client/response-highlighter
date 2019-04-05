@@ -14,7 +14,6 @@ the License.
 import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
 import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
 import '../../@advanced-rest-client/prism-highlight/prism-highlight.js';
-import '../../@polymer/iron-flex-layout/iron-flex-layout.js';
 /**
  * An element that parses the HTTP response and displays highlighted result.
  *
@@ -79,13 +78,12 @@ class ResponseHighlighter extends PolymerElement {
     <style>
     :host {
       display: block;
-      @apply --response-highlighter;
     }
 
     .actions-panel {
-      @apply --layout-horizontal;
-      @apply --layout-center;
-      @apply --response-highlighter-action-bar;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
     }
 
     .actions-panel.hidden {
@@ -93,7 +91,8 @@ class ResponseHighlighter extends PolymerElement {
     }
 
     .no-info {
-      @apply --no-info-message;
+      color: var(--empty-info-color, rgba(0, 0, 0, 0.74));
+      font-size: var(--empty-info-fonr-size, 16px);
     }
 
     [hidden] {

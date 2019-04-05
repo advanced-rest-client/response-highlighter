@@ -50,7 +50,6 @@
   ],
   "dependencies": {
     "@advanced-rest-client/prism-highlight": "^4.0.0-preview.3",
-    "@polymer/iron-flex-layout": "^3.0.0",
     "@polymer/polymer": "^3.2.0"
   }
 }
