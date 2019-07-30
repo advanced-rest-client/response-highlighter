@@ -5,16 +5,16 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   response-highlighter.html
+ *   response-highlighter.js
  */
 
 
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../prism-highlight/prism-highlight.d.ts" />
-/// <reference path="../iron-flex-layout/iron-flex-layout.d.ts" />
+import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+
+import {html} from '@polymer/polymer/lib/utils/html-tag.js';
 
 declare namespace UiElements {
 
@@ -71,7 +71,7 @@ declare namespace UiElements {
    *
    * See prism-highlight element for more styling options.
    */
-  class ResponseHighlighter extends Polymer.Element {
+  class ResponseHighlighter extends PolymerElement {
 
     /**
      * The response text to display.
@@ -90,21 +90,9 @@ declare namespace UiElements {
     contentType: string|null|undefined;
 
     /**
-     * Attribute binded to the prism-highlight element.
-     */
-    maxRead: number|null|undefined;
-
-    /**
      * The lang property for the Prism.
      */
     readonly lang: string|null|undefined;
-
-    /**
-     * Set to `true` when `prism-highlight` dispatches `prism-highlight-timeout`
-     * event. It informs application that there was a timeout.
-     * It is cleared when `lang` or `hasResponse` changes
-     */
-    readonly isTimeout: boolean|null|undefined;
 
     /**
      * Computes if the element has the response data.
@@ -117,23 +105,15 @@ declare namespace UiElements {
     _computeActionsPanelClass(hasResponse: any): any;
 
     /**
-     * Computes a `lang` property for the Prism from the response content-type
+     * Computes a `lang` property for the Prism from the response content-type.
      */
-    _computeLang(contentType: any): any;
-
-    /**
-     * Handler for `prism-highlight-timeout` custom event.
-     * Sets `isTimeout` property to `true`.
-     */
-    _prismTimeout(): void;
-
-    /**
-     * Clears `isTimeout` flag if set to true.
-     */
-    _clearTimeout(): void;
+    _computeLang(contentType: String|null): String|null;
   }
 }
 
-interface HTMLElementTagNameMap {
-  "response-highlighter": UiElements.ResponseHighlighter;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "response-highlighter": UiElements.ResponseHighlighter;
+  }
 }
