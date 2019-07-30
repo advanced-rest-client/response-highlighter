@@ -11,9 +11,9 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 */
-import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
-import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
-import '../../@advanced-rest-client/prism-highlight/prism-highlight.js';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import '@advanced-rest-client/prism-highlight/prism-highlight.js';
 /**
  * An element that parses the HTTP response and displays highlighted result.
  *
@@ -103,8 +103,7 @@ class ResponseHighlighter extends PolymerElement {
       <slot name="content-action"></slot>
     </div>
     <prism-highlight hidden\$="[[!hasResponse]]" code="[[responseText]]" lang\$="[[lang]]"></prism-highlight>
-    <p class="no-info" hidden\$="[[hasResponse]]">Nothing to display.</p>
-`;
+    <p class="no-info" hidden\$="[[hasResponse]]">Nothing to display.</p>`;
   }
 
   static get is() {
