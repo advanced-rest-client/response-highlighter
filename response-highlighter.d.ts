@@ -12,9 +12,7 @@
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
+import {html, css, LitElement} from 'lit-element';
 
 declare namespace UiElements {
 
@@ -71,7 +69,14 @@ declare namespace UiElements {
    *
    * See prism-highlight element for more styling options.
    */
-  class ResponseHighlighter extends PolymerElement {
+  class ResponseHighlighter extends LitElement {
+    readonly _actionsPanelClass: any;
+
+    /**
+     * The lang property for the Prism.
+     *    
+     */
+    readonly lang: any;
 
     /**
      * The response text to display.
@@ -79,30 +84,12 @@ declare namespace UiElements {
     responseText: string|null|undefined;
 
     /**
-     * Computed value, true if the responseText has text.
-     */
-    readonly hasResponse: boolean|null|undefined;
-
-    /**
      * Response content type.
      * It will be used to determine which syntaxt highlighter to use.
      */
     contentType: string|null|undefined;
-
-    /**
-     * The lang property for the Prism.
-     */
-    readonly lang: string|null|undefined;
-
-    /**
-     * Computes if the element has the response data.
-     */
-    _computeHasResponse(responseText: any): any;
-
-    /**
-     * Computes CSS class for the content actions pane.
-     */
-    _computeActionsPanelClass(hasResponse: any): any;
+    constructor();
+    render(): any;
 
     /**
      * Computes a `lang` property for the Prism from the response content-type.

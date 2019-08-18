@@ -1,10 +1,8 @@
 import '@advanced-rest-client/arc-demo-helper/arc-demo-helper.js';
-import '@polymer/iron-flex-layout/iron-flex-layout.js';
-import '@polymer/paper-input/paper-input.js';
-import '@polymer/paper-button/paper-button.js';
 import '@polymer/paper-toast/paper-toast.js';
-import '@polymer/paper-icon-button/paper-icon-button.js';
-import '@advanced-rest-client/arc-icons';
+import '@anypoint-web-components/anypoint-input/anypoint-input.js';
+import '@anypoint-web-components/anypoint-button/anypoint-button.js';
+import '@anypoint-web-components/anypoint-styles/colors.js';
 import '../response-highlighter.js';
 
 let url = '/demo/index.html';

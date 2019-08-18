@@ -1,9 +1,18 @@
-import { fixture, assert } from '@open-wc/testing';
+import { fixture, assert, html, nextFrame } from '@open-wc/testing';
 import '../response-highlighter.js';
 
 describe('<response-highlighter>', function() {
   async function basicFixture() {
-    return (await fixture(`<response-highlighter paginate></response-highlighter>`));
+    return (await fixture(`<response-highlighter></response-highlighter>`));
+  }
+
+  async function responseFixture() {
+    let txt = 'Some test text to be displayed in the raw viewer\n';
+    txt += 'Some test text to be displayed in the raw viewer\n';
+    txt += 'Some test text to be displayed in the raw viewer\n';
+    txt += 'Some test text to be displayed in the raw viewer\n';
+    txt += 'Some test text to be displayed in the raw viewer\n';
+    return (await fixture(html`<response-highlighter .responseText="${txt}" contenttype="text/plain"></response-highlighter>`));
   }
 
   async function contentActionsFixture() {
@@ -13,47 +22,68 @@ describe('<response-highlighter>', function() {
     </response-highlighter>`));
   }
 
-  describe('basic', () => {
-    let xml;
-    let element;
-    before(async () => {
-      const response = await fetch('test.xml');
-      xml = await response.text();
+  describe('_actionsPanelClass', () => {
+    it('returns hidden class when no response', async () => {
+      const element = await basicFixture();
+      const result = element._actionsPanelClass;
+      assert.equal(result, 'actions-panel hidden');
     });
 
-    beforeEach(async () => {
-      element = await basicFixture();
-      element.responseText = xml;
-      element.contentType = 'application/xml';
-    });
-
-    it('Set hasResponse to true', () => {
-      assert.isTrue(element.hasResponse);
-    });
-
-    it('Content actions pane is visible', () => {
-      const pane = element.shadowRoot.querySelector('.actions-panel');
-      assert.isFalse(pane.classList.contains('hidden'));
+    it('returns base class when response', async () => {
+      const element = await responseFixture();
+      const result = element._actionsPanelClass;
+      assert.equal(result, 'actions-panel');
     });
   });
 
   describe('content actions', () => {
-    let element;
-    beforeEach(async () => {
-      element = await contentActionsFixture();
-    });
-
-    it('Renders content action', () => {
+    it('has distributed nodes', async () => {
+      const element = await contentActionsFixture();
       const slot = element.shadowRoot.querySelector('slot[name="content-action"]');
       const buttons = slot.assignedNodes();
       assert.equal(buttons.length, 1);
     });
+
+    it('actions are hidden when no response', async () => {
+      const element = await basicFixture();
+      const node = element.shadowRoot.querySelector('.actions-panel');
+      const result = getComputedStyle(node).display.trim();
+      assert.equal(result, 'none');
+    });
+
+    it('actions are visible when response', async () => {
+      const element = await contentActionsFixture();
+      element.responseText = 'test';
+      await nextFrame();
+      const node = element.shadowRoot.querySelector('.actions-panel');
+      const result = getComputedStyle(node).display.trim();
+      assert.notEqual(result, 'none');
+    });
   });
 
-  describe('Content type', () => {
+  describe('basic', () => {
+    it('renders empty message when no response', async () => {
+      const element = await basicFixture();
+      const node = element.shadowRoot.querySelector('.no-info');
+      assert.ok(node);
+    });
+
+    it('renders code output when response', async () => {
+      const element = await responseFixture();
+      const node = element.shadowRoot.querySelector('prism-highlight');
+      assert.ok(node);
+    });
+
+    it('returns value for lang property', async () => {
+      const element = await responseFixture();
+      assert.equal(element.lang, 'text/plain');
+    });
+  });
+
+  describe('_computeLang()', () => {
     let element;
     beforeEach(async () => {
-      element = await contentActionsFixture();
+      element = await basicFixture();
     });
 
     it('Computes content type with charset', () => {

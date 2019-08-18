@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en-GB">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,30 +10,41 @@
   .url-input {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 
-  .url-input paper-input {
+  .url-input anypoint-input {
     flex: 1;
   }
   </style>
 </head>
 <body>
-  <div class="vertical-section-container centered">
-    <h3>The response-highlighter</h3>
+  <section role="main" class="vertical-section-container centered">
+    <h1>response-highlighter</h1>
 
     <div class="url-input">
-      <paper-input id="urlInput" type="url" label="URL" value="/demo/index.html"></paper-input>
-      <paper-button raised id="download">go</paper-button>
+      <anypoint-input id="urlInput" type="url" value="/demo/index.html">
+        <label slot="label">URL</label>
+      </anypoint-input>
+      <anypoint-button emphasis="high" id="download">go</anypoint-button>
     </div>
 
     <response-highlighter>
-      <paper-icon-button slot="content-action" title="Additional action" icon="arc:cached" id="actionClick"></paper-icon-button>
-      <paper-icon-button slot="content-action" title="Clear the code" icon="arc:clear" id="clearButton"></paper-icon-button>
+      <anypoint-button
+        slot="content-action"
+        title="Additional action example"
+        id="actionClick"
+        emphasis="medium">Custom</anypoint-button>
+      <anypoint-button
+        slot="content-action"
+        title="Clear the code"
+        id="clearButton"
+        emphasis="medium">Copy</anypoint-button>
     </response-highlighter>
 
     <paper-toast text="Additional action clicked"></paper-toast>
 
     <script type="module" src="./index.js"></script>
-  </div>
+  </section>
 </body>
 </html>

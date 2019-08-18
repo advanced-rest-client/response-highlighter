@@ -11,8 +11,7 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 */
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { html, css, LitElement } from 'lit-element';
 import '@advanced-rest-client/prism-highlight/prism-highlight.js';
 /**
  * An element that parses the HTTP response and displays highlighted result.
@@ -51,32 +50,14 @@ import '@advanced-rest-client/prism-highlight/prism-highlight.js';
  *
  * See demo for more information.
  *
- * ## Changes in version 2
- *
- * - Custom search has been removed from the element.
- *
- * ### Styling
- *
- * `<response-highlighter>` provides the following custom properties and mixins for styling:
- *
- * Custom property | Description | Default
- * ----------------|-------------|----------
- * `--response-highlighter` | Mixin applied to the element | `{}`
- * `--response-highlighter-action-bar` | Mixin applied to the action bar above the highlighted code | `{}`
- * `--no-info-message` | Mixin applied to the "nothing to display" message (theme variable) | `{}`
- *
- * See prism-highlight element for more styling options.
- *
  * @customElement
  * @polymer
  * @demo demo/index.html
  * @memberof UiElements
  */
-class ResponseHighlighter extends PolymerElement {
-  static get template() {
-    return html`
-    <style>
-    :host {
+class ResponseHighlighter extends LitElement {
+  static get styles() {
+    return css`:host {
       display: block;
     }
 
@@ -91,23 +72,28 @@ class ResponseHighlighter extends PolymerElement {
     }
 
     .no-info {
-      color: var(--empty-info-color, rgba(0, 0, 0, 0.74));
-      font-size: var(--empty-info-fonr-size, 16px);
+      font-style: var(--no-info-message-font-style, italic);
+      font-size: var(--no-info-message-font-size, 16px);
+      color: var(--no-info-message-color, rgba(0, 0, 0, 0.74));
     }
 
     [hidden] {
       display: none !important;
-    }
-    </style>
-    <div class\$="[[_computeActionsPanelClass(hasResponse)]]">
-      <slot name="content-action"></slot>
-    </div>
-    <prism-highlight hidden\$="[[!hasResponse]]" code="[[responseText]]" lang\$="[[lang]]"></prism-highlight>
-    <p class="no-info" hidden\$="[[hasResponse]]">Nothing to display.</p>`;
+    }`;
   }
 
-  static get is() {
-    return 'response-highlighter';
+  render() {
+    const {
+      responseText,
+      lang
+    } = this;
+    return html`
+    <div class="${this._actionsPanelClass}">
+      <slot name="content-action"></slot>
+    </div>
+    ${responseText ?
+      html`<prism-highlight .code="${responseText}" .lang="${lang}"></prism-highlight>`:
+      html`<p class="no-info">Nothing to display.</p>`}`;
   }
 
   static get properties() {
@@ -115,38 +101,27 @@ class ResponseHighlighter extends PolymerElement {
       /**
        * The response text to display.
        */
-      responseText: String,
-      // Computed value, true if the responseText has text.
-      hasResponse: {
-        type: Boolean,
-        value: false,
-        computed: '_computeHasResponse(responseText)'
-      },
+      responseText: { type: String },
       /**
        * Response content type.
        * It will be used to determine which syntaxt highlighter to use.
        */
-      contentType: String,
-      /**
-       * The lang property for the Prism.
-       */
-      lang: {
-        type: String,
-        computed: '_computeLang(contentType)'
-      }
+      contentType: { type: String }
     };
   }
-  // Computes if the element has the response data.
-  _computeHasResponse(responseText) {
-    return !!responseText;
-  }
-  // Computes CSS class for the content actions pane.
-  _computeActionsPanelClass(hasResponse) {
+
+  get _actionsPanelClass() {
     let clazz = 'actions-panel';
-    if (!hasResponse) {
+    if (!this.responseText) {
       clazz += ' hidden';
     }
     return clazz;
+  }
+  /**
+   * The lang property for the Prism.
+   */
+  get lang() {
+    return this._computeLang(this.contentType);
   }
   /**
    * Computes a `lang` property for the Prism from the response content-type.
@@ -164,4 +139,4 @@ class ResponseHighlighter extends PolymerElement {
     return contentType;
   }
 }
-window.customElements.define(ResponseHighlighter.is, ResponseHighlighter);
+window.customElements.define('response-highlighter', ResponseHighlighter);

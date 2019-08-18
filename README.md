@@ -13,10 +13,6 @@ An element that parses the HTTP response and displays highlighted result.
 <response-highlighter response-text="# Hello world" content-type="application/markdown"></response-highlighter>
 ```
 
-### API components
-
-This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
-
 ## Usage
 
 ### Installation
@@ -34,28 +30,30 @@ npm install --save @advanced-rest-client/response-highlighter
     </script>
   </head>
   <body>
-    <response-highlighter></response-highlighter>
+    <response-highlighter responsetext="Plain text" contenttype="text/plain"></response-highlighter>
   </body>
 </html>
 ```
 
-### In a Polymer 3 element
+### In a LitElement
 
 ```js
-import {PolymerElement, html} from '@polymer/polymer';
+import { LitElement, html } from 'lit-element';
 import '@advanced-rest-client/response-highlighter/response-highlighter.js';
 
 class SampleElement extends PolymerElement {
-  static get template() {
+  render() {
     return html`
-    <response-highlighter></response-highlighter>
+    <response-highlighter
+      .responseText="${this.response}"
+      .contentType="${this.contentType}"></response-highlighter>
     `;
   }
 }
 customElements.define('sample-element', SampleElement);
 ```
 
-### Installation
+## Development
 
 ```sh
 git clone https://github.com/advanced-rest-client/response-highlighter
@@ -70,7 +68,10 @@ npm start
 ```
 
 ### Running the tests
-
 ```sh
 npm test
 ```
+
+### API components
+
+This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
