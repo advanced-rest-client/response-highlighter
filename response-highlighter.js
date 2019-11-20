@@ -56,7 +56,7 @@ import '@advanced-rest-client/prism-highlight/prism-highlight.js';
  * @memberof UiElements
  */
 class ResponseHighlighter extends LitElement {
-  static get styles() {
+  get styles() {
     return css`:host {
       display: block;
     }
@@ -87,7 +87,7 @@ class ResponseHighlighter extends LitElement {
       responseText,
       lang
     } = this;
-    return html`
+    return html`<style>${this.styles}</style>
     <div class="${this._actionsPanelClass}">
       <slot name="content-action"></slot>
     </div>
