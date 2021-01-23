@@ -1,21 +1,14 @@
-## Deprecation notice
-
-This component is deprecated. Use `@advanced-rest-client/arc-response` instead.
-
-[![Published on NPM](https://img.shields.io/npm/v/@advanced-rest-client/response-highlighter.svg)](https://www.npmjs.com/package/@advanced-rest-client/response-highlighter)
-
-[![Build Status](https://travis-ci.org/advanced-rest-client/response-highlighter.svg?branch=stage)](https://travis-ci.org/advanced-rest-client/response-highlighter)
-
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/advanced-rest-client/response-highlighter)
-
-## &lt;response-highlighter&gt;
+# &lt;response-highlighter&gt;
 
 An element that parses the HTTP response and displays highlighted result.
-
 
 ```html
 <response-highlighter response-text="# Hello world" content-type="application/markdown"></response-highlighter>
 ```
+
+## Deprecation notice
+
+This component is deprecated. Use `@advanced-rest-client/arc-response` instead.
 
 ## Usage
 
